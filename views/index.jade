@@ -1,0 +1,18 @@
+extends layout
+
+.header
+  block header
+    a.button(href="/counter/:userId") Your counter
+    a.button(href="/counter") All counter
+    a.button(href="/user/:userId") Profile
+.sidebar-left
+.main
+  block main
+    div
+      a.loginReg(href='/registration')
+        p Registration
+      a.loginReg(href='/login')
+        p Log in
+.sidebar-right
+.footer
+  block footer
