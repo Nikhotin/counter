@@ -1,0 +1,27 @@
+extends layout
+
+.header
+  block header
+    a.button(href="/counter/:userId") Your counter
+    a.button#active(href="/counter") All counter
+    a.button(href="/user/:userId") Profile
+.sidebar-left
+.main
+  block main
+    div
+      p Выпитых чашек кофе
+      coffeeCount= coffeeCount
+    div
+      p Заказанных пицц
+      pizzaCount= pizzaCount
+    div
+      p Выпитых банок пива
+      beerCount= beerCount
+    div
+      p Съеденых печенек
+      cookieCount= cookieCount
+.sidebar-right
+.footer
+  block footer
+    form(action='/logout')
+      button(type='submit') Log out

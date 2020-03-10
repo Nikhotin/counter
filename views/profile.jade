@@ -1,0 +1,20 @@
+extends layout
+
+.header
+  block header
+    a.button(href="/counter/:userId") Your counter
+    a.button(href="/counter") All counter
+    a.button#active(href="/user/:userId") Profile
+.sidebar-left
+.main
+  block main
+    form(method='POST' action='/user')
+      div
+        label(for='password') Password
+        input(type='password' id='password' placeholder='password' name='password')
+      button(type='submit') Change password
+.sidebar-right
+.footer
+  block footer
+    form(action='/logout')
+      button(type='submit') Log out

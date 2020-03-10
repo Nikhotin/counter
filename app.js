@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('./app/models');
 const config = require('./config');
 
 mongoose.set('useCreateIndex', true);

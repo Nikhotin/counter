@@ -1,0 +1,36 @@
+extends layout
+
+.header
+  block header
+    a.button#active(href="/counter/:userId") Your counter
+    a.button(href="/counter") All counter
+    a.button(href="/user/:userId") Profile
+.sidebar-left
+.main
+  block main
+    div
+      p Выпитых чашек кофе
+      coffeeCount= coffeeCount
+    div
+      p Заказанных пицц
+      pizzaCount= pizzaCount
+    div
+      p Выпитых банок пива
+      beerCount= beerCount
+    div
+      p Съеденых печенек
+      cookieCount= cookieCount
+    form(method='POST' action='/counter')
+      div
+        p
+          select(name='category')
+            option(value='Чашка кофе') Кофе
+            option(value='Пицца') Пицца
+            option(value='Банка пива') Пиво
+            option(value='Печенька') Печенька
+          input(type='submit', value='+1')
+.sidebar-right
+.footer
+  block footer
+    form(action='/logout')
+      button(type='submit') Log out

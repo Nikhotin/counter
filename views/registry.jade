@@ -1,0 +1,21 @@
+extends layout
+
+.header
+  block header
+    a.button(href="/counter/:userId") Your counter
+    a.button(href="/counter") All counter
+    a.button(href="/user/:userId") Profile
+.sidebar-left
+.main
+  block main
+    form(method='POST' action='/registry')
+          div
+            label(for='name') Username
+            input(type='text' id='name' placeholder='name' name='name')
+          div
+            label(for='password') Password
+            input(type='password' id='password' placeholder='password' name='password')
+          button(type='submit') Log on
+.sidebar-right
+.footer
+  block footer
