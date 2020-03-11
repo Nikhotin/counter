@@ -9,19 +9,35 @@ module.exports = (app) => {
 
   // users
   app.get('/users', authMiddleware, users.getAll);
-  app.post('/users', authMiddleware, users.create);
-  app.put('/users/:userId', authMiddleware, users.update);
-  app.delete('/users/:userId', authMiddleware, users.remove);
-  app.get('/profile/:userId', (req, res) => res.render('profile'));
+  app.post('/users', users.create);
+  app.put('/users/:id', authMiddleware, users.update);
+  app.delete('/users/:id', authMiddleware, users.remove);
+  app.get('/profile/:id', authMiddleware, (req, res) => {
+    const { userId } = req.session;
+    res.render('profile', {
+      userId,
+    });
+  });
 
   // counter
   app.get('/counter', counter.getEveryCount);
-  app.get('/counter/:userId', counter.getEveryCountById);
+  app.get('/counter/:id', authMiddleware, counter.getEveryCountById);
   app.post('/counter', authMiddleware, counter.create);
 
   // auth
   app.get('/registration', (req, res) => res.render('registry'));
   app.get('/login', (req, res) => res.render('login'));
-  // app.get('/logout');
+  app.get('/singin', auth.singIn);
   app.post('/singin', auth.singIn);
+  app.get('/logout', (req, res, next) => {
+    if (req.session) {
+      // delete session object
+      req.session.destroy((err) => {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect('/');
+      });
+    }
+  });
 };
