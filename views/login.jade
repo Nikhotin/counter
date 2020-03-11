@@ -2,20 +2,22 @@ extends layout
 
 .header
   block header
-    a.button(href="/counter/:userId") Your counter
+    a.button(href="/counter/:id") Your counter
     a.button(href="/counter") All counter
-    a.button(href="/user/:userId") Profile
+    a.button(href="/profile/:id") Profile
 .sidebar-left
 .main
   block main
-    form(method='POST' action='/login')
+    form(method='POST' action='/singin')
           div
             label(for='name') Username
-            input(type='text' id='name' placeholder='name' name='name')
+            input(type='text' placeholder='name' name='name')
           div
             label(for='password') Password
-            input(type='password' id='password' placeholder='password' name='password')
+            input(type='password' placeholder='password' name='password')
           button(type='submit') Log in 
 .sidebar-right
 .footer
   block footer
+    form(action='/logout')
+      button(type='submit') Log out

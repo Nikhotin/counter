@@ -2,9 +2,9 @@ extends layout
 
 .header
   block header
-    a.button#active(href="/counter/:userId") Your counter
+    a.button#active(href="/counter/:id") Your counter
     a.button(href="/counter") All counter
-    a.button(href="/user/:userId") Profile
+    a.button(href="/profile/:id") Profile
 .sidebar-left
 .main
   block main
@@ -23,6 +23,7 @@ extends layout
     form(method='POST' action='/counter')
       div
         p
+          input(type='hidden', name='userId', value=userId)
           select(name='category')
             option(value='Чашка кофе') Кофе
             option(value='Пицца') Пицца

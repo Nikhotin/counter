@@ -1,4 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../../config/app');
 
 const User = mongoose.model('User');
 
@@ -11,7 +14,12 @@ const getAll = (req, res) => {
 
 const create = (req, res) => {
   User.create(req.body)
-    .then((createdUser) => res.json(createdUser))
+    .then((user) => {
+      const token = jwt.sign(user._id.toString(), jwtSecret);
+      req.session.userId = user._id.toString();
+      req.session.token = token;
+      res.redirect(`/counter/${req.session.userId}`);
+    })
     .catch((err) => res.status(500).json(err));
 };
 

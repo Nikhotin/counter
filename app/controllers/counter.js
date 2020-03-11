@@ -28,7 +28,7 @@ const getEveryCount = async (req, res) => {
 };
 
 const getEveryCountById = async (req, res) => {
-  const { userId } = req.params;
+  const { userId } = req.session;
 
   const coffeeCount = await Counter.countDocuments()
     .where('category')
@@ -55,6 +55,7 @@ const getEveryCountById = async (req, res) => {
     .equals(userId);
 
   res.render('myCounter', {
+    userId,
     coffeeCount,
     beerCount,
     pizzaCount,
@@ -64,7 +65,7 @@ const getEveryCountById = async (req, res) => {
 
 const create = (req, res) => {
   Counter.create(req.body)
-    .then((createdCounter) => res.json(createdCounter))
+    .then(() => res.redirect(`/counter/${req.session.userId}`))
     .catch((err) => res.status(500).json(err));
 };
 

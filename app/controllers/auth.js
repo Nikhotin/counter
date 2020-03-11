@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const bCrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,9 @@ const singIn = (req, res) => {
       const isValid = bCrypt.compare(password, user.password);
       if (isValid) {
         const token = jwt.sign(user._id.toString(), jwtSecret);
-        res.json({ token });
+        req.session.userId = user._id.toString();
+        req.session.token = token;
+        res.redirect(`/counter/${req.session.userId}`);
       } else {
         res.status(401).json({ message: 'Invalid credentials!' });
       }

@@ -2,9 +2,9 @@ extends layout
 
 .header
   block header
-    a.button(href="/counter/:userId") Your counter
+    a.button(href="/counter/:id") Your counter
     a.button(href="/counter") All counter
-    a.button(href="/user/:userId") Profile
+    a.button(href="/profile/:id") Profile
 .sidebar-left
 .main
   block main
@@ -16,3 +16,5 @@ extends layout
 .sidebar-right
 .footer
   block footer
+    form(action='/logout')
+      button(type='submit') Log out
